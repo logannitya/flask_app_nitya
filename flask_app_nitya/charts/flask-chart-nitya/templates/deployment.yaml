@@ -20,4 +20,6 @@ spec:
       containers:
       - image: us.gcr.io/black-beach-295409/my_flask_app:v.1.0.0 
         name: myflaskapp
+        ports:
+        - containerPort: 5000
         resources: {}
