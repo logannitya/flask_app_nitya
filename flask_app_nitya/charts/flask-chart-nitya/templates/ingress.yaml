@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: nitya-ingress 
+  annotations: 
+    kubernetes.io/ingress.allow-http: "false" 
+    kubernetes.io/ingress.global-static-ip-name: nitya-us-central1-ip 
+spec: 
+ tls: 
+ - hosts: 
+   - "www.34.71.99.97.xip.io"
+   secretName: nitya-flask-tls 
+ rules:
+ - http:
+    paths:
+    - path: /*
+      backend:
+       serviceName: my-flask-app-svc
+       servicePort: 443 
+           
+

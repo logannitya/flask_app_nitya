@@ -3,12 +3,15 @@ kind: Service
 metadata:
   labels:
     app: my-flask-app
-  name: my-flask-app
+  name: my-flask-app-svc
+  annotations: 
+   cloud.google.com/app-protocols: '{"nitya-flask-tls":"HTTPS"}'
 spec:
   type: NodePort
   ports:
-  - port: 80
+  - name: nitya-flask-tls
+    port: 443
     protocol: TCP
-    targetPort: 5000
+    targetPort: 8443
   selector:
     app: my-flask-app

@@ -1,7 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  creationTimestamp: null
   labels:
     app: my-flask-app
   name: my-flask-app
@@ -13,13 +12,26 @@ spec:
   strategy: {}
   template:
     metadata:
-      creationTimestamp: null
       labels:
         app: my-flask-app
     spec:
       containers:
-      - image: us.gcr.io/black-beach-295409/my_flask_app:v.1.0.0 
+      - image: us.gcr.io/black-beach-295409/my_flask_app:v.2.0.0
+        imagePullPolicy: Always 
         name: myflaskapp
         ports:
-        - containerPort: 5000
+        - containerPort: 8443
         resources: {}
+        volumeMounts: 
+        - name: tls 
+          mountPath: /etc/tls 
+          readOnly: true
+        env: 
+        - name: TLS_CERT
+          value: /etc/tls/tls.crt
+        - name: TLS_KEY
+          value: /etc/tls/tls.key 
+      volumes: 
+        - name: tls 
+          secret: 
+           secretName: nitya-flask-tls 

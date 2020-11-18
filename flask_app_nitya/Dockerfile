@@ -7,5 +7,5 @@ COPY my_flask_app.py /app/
 RUN pip install flask
 RUN pip install flask_cors
 
-EXPOSE 5000
+EXPOSE 8443
 CMD ["python", "/app/my_flask_app.py"]
